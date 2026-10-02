@@ -1,0 +1,3961 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Muller Market | Comunidad y Emprendimiento</title>
+
+    <style>
+        /* =========================================================
+           VARIABLES
+        ========================================================= */
+
+        :root {
+            --azul: #102f52;
+            --azul-2: #173f6b;
+            --azul-claro: #2c6aa3;
+            --amarillo: #ffd43b;
+            --amarillo-hover: #ffdf62;
+
+            --fondo: #f5f7fb;
+            --blanco: #ffffff;
+            --texto: #1c2733;
+            --texto-suave: #64748b;
+            --borde: #e5eaf0;
+
+            --verde: #16a36a;
+            --rojo: #dc3545;
+
+            --sombra: 0 10px 30px rgba(16, 47, 82, 0.09);
+            --sombra-hover: 0 18px 40px rgba(16, 47, 82, 0.15);
+
+            --radio: 18px;
+            --transicion: all 0.3s ease;
+        }
+
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background: var(--fondo);
+            color: var(--texto);
+            line-height: 1.6;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+        }
+
+
+        /* =========================================================
+           SCROLLBAR
+        ========================================================= */
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #edf1f5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--azul);
+            border-radius: 20px;
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            height: 76px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            background: rgba(16, 47, 82, 0.96);
+            backdrop-filter: blur(14px);
+
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+
+        /* LOGO */
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: white;
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: var(--amarillo);
+            color: var(--azul);
+
+            border-radius: 12px;
+
+            font-size: 20px;
+
+            box-shadow: 0 5px 15px rgba(255,212,59,0.25);
+        }
+
+        .logo span {
+            color: var(--amarillo);
+        }
+
+
+        /* NAVEGACIÓN */
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        nav a {
+            position: relative;
+
+            color: rgba(255,255,255,0.88);
+
+            text-decoration: none;
+
+            padding: 9px 12px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: var(--transicion);
+        }
+
+        nav a:hover {
+            color: white;
+            background: rgba(255,255,255,0.09);
+        }
+
+
+        /* CUENTA */
+
+        .cuenta-menu {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-left: 15px;
+        }
+
+        #botones-no-login {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-login {
+            background: transparent;
+            color: white;
+
+            border: 1px solid rgba(255,212,59,0.8);
+
+            padding: 9px 13px;
+            border-radius: 9px;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            transition: var(--transicion);
+        }
+
+        .btn-login:hover {
+            background: var(--amarillo);
+            color: var(--azul);
+            transform: translateY(-1px);
+        }
+
+        .btn-cuenta {
+            background: var(--amarillo);
+            color: var(--azul);
+
+            border: none;
+
+            padding: 10px 15px;
+            border-radius: 9px;
+
+            font-size: 13px;
+            font-weight: 800;
+
+            transition: var(--transicion);
+        }
+
+        .btn-cuenta:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+
+        /* USUARIO LOGUEADO */
+
+        .usuario-activo {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nombre-usuario {
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+
+            max-width: 130px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .btn-cerrar {
+            background: rgba(220,53,69,0.15);
+            color: #ff9da6;
+
+            border: 1px solid rgba(220,53,69,0.4);
+
+            padding: 8px 11px;
+            border-radius: 8px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            transition: var(--transicion);
+        }
+
+        .btn-cerrar:hover {
+            background: var(--rojo);
+            color: white;
+        }
+
+
+        /* =========================================================
+           HERO / INICIO
+        ========================================================= */
+
+        #inicio {
+            position: relative;
+
+            min-height: calc(100vh - 76px);
+
+            display: flex;
+            align-items: center;
+
+            overflow: hidden;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(8, 30, 53, 0.94) 0%,
+                    rgba(13, 48, 82, 0.82) 45%,
+                    rgba(13, 48, 82, 0.48) 100%
+                ),
+                url("image.jpg");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+
+        /* DECORACIONES */
+
+        #inicio::before {
+            content: "";
+
+            position: absolute;
+
+            width: 400px;
+            height: 400px;
+
+            right: -150px;
+            top: -100px;
+
+            border-radius: 50%;
+
+            background: rgba(255,212,59,0.12);
+
+            filter: blur(5px);
+        }
+
+        #inicio::after {
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            left: -100px;
+            bottom: -100px;
+
+            border-radius: 50%;
+
+            background: rgba(44,106,163,0.3);
+        }
+
+
+        .hero {
+            position: relative;
+            z-index: 2;
+
+            width: 100%;
+            max-width: 1250px;
+
+            margin: 0 auto;
+
+            padding: 80px 6%;
+        }
+
+        .hero-content {
+            max-width: 720px;
+        }
+
+
+        /* ETIQUETA */
+
+        .coin {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 9px 15px;
+
+            margin-bottom: 22px;
+
+            background: rgba(255,212,59,0.13);
+
+            border: 1px solid rgba(255,212,59,0.45);
+
+            border-radius: 50px;
+
+            color: var(--amarillo);
+
+            font-size: 13px;
+            font-weight: 800;
+
+            backdrop-filter: blur(8px);
+        }
+
+
+        .hero h1 {
+            margin-bottom: 20px;
+
+            font-size: clamp(48px, 7vw, 82px);
+
+            line-height: 0.98;
+
+            letter-spacing: -3px;
+
+            font-weight: 900;
+        }
+
+        .hero h1 span {
+            color: var(--amarillo);
+        }
+
+        .hero-description {
+            max-width: 650px;
+
+            margin-bottom: 30px;
+
+            color: rgba(255,255,255,0.83);
+
+            font-size: 19px;
+            line-height: 1.7;
+        }
+
+
+        /* BOTONES HERO */
+
+        .botones-inicio {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .boton {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            min-height: 46px;
+
+            padding: 0 21px;
+
+            background: var(--amarillo);
+            color: var(--azul);
+
+            border: none;
+            border-radius: 10px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 800;
+
+            transition: var(--transicion);
+
+            box-shadow: 0 8px 20px rgba(255,212,59,0.15);
+        }
+
+        .boton:hover {
+            background: var(--amarillo-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(255,212,59,0.25);
+        }
+
+        .boton-secundario {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: 46px;
+
+            padding: 0 20px;
+
+            background: rgba(255,255,255,0.06);
+            color: white;
+
+            border: 1px solid rgba(255,255,255,0.35);
+
+            border-radius: 10px;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            transition: var(--transicion);
+
+            backdrop-filter: blur(8px);
+        }
+
+        .boton-secundario:hover {
+            background: white;
+            color: var(--azul);
+            transform: translateY(-3px);
+        }
+
+
+        /* ESTADÍSTICAS HERO */
+
+        .hero-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 35px;
+
+            margin-top: 55px;
+            padding-top: 25px;
+
+            border-top: 1px solid rgba(255,255,255,0.16);
+        }
+
+        .hero-stat strong {
+            display: block;
+
+            color: white;
+
+            font-size: 25px;
+            font-weight: 900;
+        }
+
+        .hero-stat span {
+            color: rgba(255,255,255,0.6);
+
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+
+        /* =========================================================
+           SECCIONES
+        ========================================================= */
+
+        section {
+            padding: 95px 6%;
+        }
+
+        .section-inner {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-header {
+            max-width: 720px;
+            margin-bottom: 45px;
+        }
+
+        .section-label {
+            display: inline-block;
+
+            margin-bottom: 10px;
+
+            color: #a17400;
+
+            font-size: 12px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        section h2 {
+            margin-bottom: 13px;
+
+            color: var(--azul);
+
+            font-size: clamp(30px, 4vw, 43px);
+
+            line-height: 1.15;
+
+            letter-spacing: -1px;
+
+            font-weight: 900;
+        }
+
+        .section-header > p {
+            color: var(--texto-suave);
+            font-size: 16px;
+        }
+
+
+        /* =========================================================
+           EDUCACIÓN
+        ========================================================= */
+
+        #educacion {
+            background: white;
+        }
+
+        .educacion-container {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+        }
+
+        .tarjeta {
+            position: relative;
+
+            padding: 27px;
+
+            background: #f8fafc;
+
+            border: 1px solid var(--borde);
+
+            border-radius: var(--radio);
+
+            transition: var(--transicion);
+
+            overflow: hidden;
+        }
+
+        .tarjeta::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 3px;
+
+            background: var(--amarillo);
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-7px);
+
+            background: white;
+
+            box-shadow: var(--sombra-hover);
+        }
+
+        .tarjeta-icon {
+            width: 52px;
+            height: 52px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 18px;
+
+            background: #eaf1f8;
+
+            border-radius: 14px;
+
+            font-size: 24px;
+        }
+
+        .tarjeta h3 {
+            margin-bottom: 9px;
+
+            color: var(--azul);
+
+            font-size: 18px;
+        }
+
+        .tarjeta p {
+            color: var(--texto-suave);
+
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+
+        /* =========================================================
+           EMPRENDIMIENTOS
+        ========================================================= */
+
+        #emprendimientos {
+            background: var(--fondo);
+        }
+
+        .emprendimientos {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 22px;
+        }
+
+        .producto {
+            display: flex;
+            flex-direction: column;
+
+            min-width: 0;
+
+            background: white;
+
+            border: 1px solid var(--borde);
+
+            border-radius: var(--radio);
+
+            overflow: hidden;
+
+            box-shadow: 0 5px 18px rgba(16,47,82,0.05);
+
+            transition: var(--transicion);
+        }
+
+        .producto:hover {
+            transform: translateY(-7px);
+
+            box-shadow: var(--sombra-hover);
+        }
+
+        .producto-imagen {
+            position: relative;
+
+            height: 190px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e9eff5,
+                    #dce6ef
+                );
+
+            color: #738396;
+
+            font-size: 13px;
+            font-weight: 800;
+
+            overflow: hidden;
+        }
+
+        .producto-imagen::after {
+            content: "Muller Market";
+
+            position: absolute;
+
+            left: 13px;
+            bottom: 13px;
+
+            padding: 5px 9px;
+
+            background: rgba(16,47,82,0.8);
+
+            color: white;
+
+            border-radius: 6px;
+
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        .producto-imagen img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: transform 0.5s ease;
+        }
+
+        .producto:hover .producto-imagen img {
+            transform: scale(1.05);
+        }
+
+        .producto-info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+
+            padding: 22px;
+        }
+
+        .producto-info h3 {
+            margin-bottom: 7px;
+
+            color: var(--azul);
+
+            font-size: 18px;
+        }
+
+        .producto-info > p {
+            color: var(--texto-suave);
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        .precio {
+            margin-top: auto;
+            padding-top: 18px;
+
+            color: #b37d00;
+
+            font-size: 21px;
+            font-weight: 900;
+        }
+
+        .boton-comprar {
+            width: 100%;
+
+            margin-top: 13px;
+
+            padding: 11px;
+
+            background: var(--azul);
+            color: white;
+
+            border: none;
+            border-radius: 9px;
+
+            font-size: 13px;
+            font-weight: 800;
+
+            transition: var(--transicion);
+        }
+
+        .boton-comprar:hover {
+            background: var(--azul-claro);
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================================================
+           EMPRENDEDORES
+        ========================================================= */
+
+        #emprendedores {
+            background: white;
+        }
+
+        .emprendedores {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+        }
+
+        .emprendedor {
+            padding: 30px;
+
+            text-align: center;
+
+            background: #f8fafc;
+
+            border: 1px solid var(--borde);
+
+            border-radius: var(--radio);
+
+            transition: var(--transicion);
+        }
+
+        .emprendedor:hover {
+            transform: translateY(-6px);
+
+            background: white;
+
+            box-shadow: var(--sombra-hover);
+        }
+
+        .foto-emprendedor {
+            position: relative;
+
+            width: 100px;
+            height: 100px;
+
+            margin: 0 auto 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #dce7f1,
+                    #cbd9e7
+                );
+
+            border: 5px solid white;
+
+            border-radius: 50%;
+
+            color: #718196;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            box-shadow: 0 7px 20px rgba(16,47,82,0.1);
+
+            overflow: hidden;
+        }
+
+        .foto-emprendedor img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+        .emprendedor h3 {
+            margin-bottom: 7px;
+
+            color: var(--azul);
+
+            font-size: 18px;
+        }
+
+        .emprendedor p {
+            color: var(--texto-suave);
+
+            font-size: 13px;
+        }
+
+        .emprendedor p:last-child {
+            margin-top: 5px;
+
+            color: #a17400;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================================
+           PUBLICAR
+        ========================================================= */
+
+        #publicar {
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef3f8,
+                    #f7f9fb
+                );
+        }
+
+        .publicar-container {
+            max-width: 760px;
+
+            margin: auto;
+        }
+
+        .aviso-login {
+            padding: 42px;
+
+            text-align: center;
+
+            background: white;
+
+            border: 1px solid var(--borde);
+
+            border-radius: 20px;
+
+            box-shadow: var(--sombra);
+        }
+
+        .aviso-icon {
+            width: 65px;
+            height: 65px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 18px;
+
+            background: #fff6ce;
+
+            border-radius: 18px;
+
+            font-size: 27px;
+        }
+
+        .aviso-login h3 {
+            margin-bottom: 9px;
+
+            color: var(--azul);
+
+            font-size: 23px;
+        }
+
+        .aviso-login p {
+            max-width: 550px;
+
+            margin: 0 auto;
+
+            color: var(--texto-suave);
+
+            font-size: 14px;
+        }
+
+        .aviso-botones {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            margin-top: 25px;
+        }
+
+
+        /* FORMULARIO PUBLICAR */
+
+        .form-publicar {
+            display: none;
+
+            padding: 35px;
+
+            background: white;
+
+            border: 1px solid var(--borde);
+
+            border-radius: 20px;
+
+            box-shadow: var(--sombra);
+        }
+
+        .form-publicar h3 {
+            margin-bottom: 25px;
+
+            color: var(--azul);
+
+            font-size: 23px;
+        }
+
+        .campo {
+            margin-bottom: 18px;
+        }
+
+        .campo label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: var(--azul);
+
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .form-publicar input,
+        .form-publicar textarea {
+            width: 100%;
+
+            padding: 12px 14px;
+
+            background: #fbfcfe;
+
+            border: 1px solid #d9e0e8;
+
+            border-radius: 9px;
+
+            color: var(--texto);
+
+            outline: none;
+
+            transition: var(--transicion);
+        }
+
+        .form-publicar input:focus,
+        .form-publicar textarea:focus {
+            background: white;
+
+            border-color: var(--azul-claro);
+
+            box-shadow: 0 0 0 3px rgba(44,106,163,0.1);
+        }
+
+        .form-publicar textarea {
+            min-height: 130px;
+
+            resize: vertical;
+        }
+
+        .form-publicar input[type="file"] {
+            padding: 9px;
+        }
+
+        .form-publicar button {
+            width: 100%;
+
+            padding: 13px;
+
+            background: var(--azul);
+            color: white;
+
+            border: none;
+            border-radius: 9px;
+
+            font-weight: 800;
+
+            transition: var(--transicion);
+        }
+
+        .form-publicar button:hover {
+            background: var(--azul-claro);
+        }
+
+
+        /* =========================================================
+           PERFIL
+        ========================================================= */
+
+        #perfil {
+            display: none;
+
+            background: white;
+        }
+
+        .perfil-container {
+            max-width: 800px;
+
+            margin: auto;
+            padding: 32px;
+
+            background: #f8fafc;
+
+            border: 1px solid var(--borde);
+
+            border-radius: 18px;
+        }
+
+        .perfil-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            margin-bottom: 25px;
+        }
+
+        .perfil-avatar {
+            width: 55px;
+            height: 55px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: var(--azul);
+            color: var(--amarillo);
+
+            border-radius: 14px;
+
+            font-size: 23px;
+        }
+
+        .perfil-header h3 {
+            color: var(--azul);
+        }
+
+        .perfil-header p {
+            color: var(--texto-suave);
+
+            font-size: 13px;
+        }
+
+        .perfil-dato {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+
+            padding: 15px 17px;
+
+            margin-bottom: 8px;
+
+            background: white;
+
+            border: 1px solid var(--borde);
+
+            border-radius: 9px;
+        }
+
+        .perfil-dato strong {
+            color: var(--azul);
+        }
+
+        .perfil-dato span {
+            color: var(--texto-suave);
+        }
+
+        .perfil-container > button {
+            margin-top: 12px;
+
+            background: var(--rojo);
+
+            color: white;
+
+            border: none;
+
+            padding: 10px 17px;
+
+            border-radius: 8px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================================
+           CONTACTO
+        ========================================================= */
+
+        #contacto {
+            background: var(--fondo);
+        }
+
+        .contacto-container {
+            display: grid;
+
+            grid-template-columns: 0.9fr 1.1fr;
+
+            gap: 25px;
+
+            align-items: stretch;
+        }
+
+        .contacto-info {
+            position: relative;
+
+            padding: 35px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    var(--azul),
+                    #0c2743
+                );
+
+            color: white;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+        }
+
+        .contacto-info::after {
+            content: "MC";
+
+            position: absolute;
+
+            right: -20px;
+            bottom: -55px;
+
+            color: rgba(255,255,255,0.035);
+
+            font-size: 180px;
+            font-weight: 900;
+        }
+
+        .contacto-info h3 {
+            position: relative;
+            z-index: 2;
+
+            margin-bottom: 20px;
+
+            color: var(--amarillo);
+
+            font-size: 23px;
+        }
+
+        .contacto-item {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+
+            margin-bottom: 18px;
+        }
+
+        .contacto-item-icon {
+            width: 36px;
+            height: 36px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255,255,255,0.08);
+
+            border-radius: 9px;
+        }
+
+        .contacto-item div:last-child {
+            color: rgba(255,255,255,0.72);
+
+            font-size: 13px;
+        }
+
+        .contacto-item strong {
+            display: block;
+
+            margin-bottom: 2px;
+
+            color: white;
+
+            font-size: 13px;
+        }
+
+        .contacto-form {
+            padding: 35px;
+
+            background: white;
+
+            border: 1px solid var(--borde);
+
+            border-radius: 20px;
+
+            box-shadow: var(--sombra);
+        }
+
+        .contacto-form h3 {
+            margin-bottom: 20px;
+
+            color: var(--azul);
+        }
+
+        .contacto-form input,
+        .contacto-form textarea {
+            width: 100%;
+
+            padding: 12px 14px;
+
+            margin-bottom: 14px;
+
+            background: #fbfcfe;
+
+            border: 1px solid #d9e0e8;
+
+            border-radius: 9px;
+
+            outline: none;
+        }
+
+        .contacto-form input:focus,
+        .contacto-form textarea:focus {
+            border-color: var(--azul-claro);
+
+            box-shadow: 0 0 0 3px rgba(44,106,163,0.1);
+        }
+
+        .contacto-form textarea {
+            height: 135px;
+
+            resize: vertical;
+        }
+
+        .contacto-form button {
+            padding: 12px 22px;
+
+            background: var(--azul);
+            color: white;
+
+            border: none;
+            border-radius: 9px;
+
+            font-weight: 800;
+
+            transition: var(--transicion);
+        }
+
+        .contacto-form button:hover {
+            background: var(--azul-claro);
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================================================
+           MODAL
+        ========================================================= */
+
+        .modal {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 3000;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background: rgba(4,16,29,0.72);
+
+            backdrop-filter: blur(7px);
+        }
+
+        .modal-contenido {
+            position: relative;
+
+            width: 100%;
+            max-width: 460px;
+
+            max-height: 90vh;
+
+            padding: 35px;
+
+            overflow-y: auto;
+
+            background: white;
+
+            border-radius: 20px;
+
+            box-shadow: 0 25px 70px rgba(0,0,0,0.28);
+
+            animation: aparecerModal 0.25s ease;
+        }
+
+        @keyframes aparecerModal {
+            from {
+                opacity: 0;
+                transform: translateY(15px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .cerrar-modal {
+            position: absolute;
+
+            right: 20px;
+            top: 16px;
+
+            width: 35px;
+            height: 35px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #f1f4f7;
+
+            color: #6b7280;
+
+            border-radius: 9px;
+
+            font-size: 23px;
+
+            cursor: pointer;
+
+            transition: var(--transicion);
+        }
+
+        .cerrar-modal:hover {
+            background: var(--azul);
+            color: white;
+        }
+
+        .modal-contenido h2 {
+            margin-bottom: 7px;
+
+            color: var(--azul);
+
+            font-size: 28px;
+        }
+
+        .modal-descripcion {
+            margin-bottom: 22px;
+
+            color: var(--texto-suave);
+
+            font-size: 13px;
+        }
+
+        .modal form {
+            padding: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .modal label {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: var(--azul);
+
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .modal input,
+        .modal select {
+            width: 100%;
+
+            padding: 12px 13px;
+
+            margin-bottom: 15px;
+
+            background: #fbfcfe;
+
+            border: 1px solid #d9e0e8;
+
+            border-radius: 9px;
+
+            outline: none;
+        }
+
+        .modal input:focus,
+        .modal select:focus {
+            background: white;
+
+            border-color: var(--azul-claro);
+
+            box-shadow: 0 0 0 3px rgba(44,106,163,0.1);
+        }
+
+        .modal button[type="submit"] {
+            width: 100%;
+
+            padding: 13px;
+
+            margin-top: 3px;
+
+            background: var(--azul);
+            color: white;
+
+            border: none;
+            border-radius: 9px;
+
+            font-weight: 800;
+
+            transition: var(--transicion);
+        }
+
+        .modal button[type="submit"]:hover {
+            background: var(--azul-claro);
+        }
+
+        .cambiar-modal {
+            margin-top: 18px;
+
+            text-align: center;
+
+            color: var(--texto-suave);
+
+            font-size: 13px;
+        }
+
+        .cambiar-modal span {
+            color: #a17400;
+
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+        .cambiar-modal span:hover {
+            text-decoration: underline;
+        }
+
+
+        /* MENSAJES */
+
+        .mensaje {
+            display: none;
+
+            padding: 11px 13px;
+
+            margin-bottom: 15px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .mensaje.error {
+            background: #fff0f1;
+            color: #a71d2a;
+
+            border: 1px solid #ffd1d5;
+        }
+
+        .mensaje.exito {
+            background: #eaf8f1;
+            color: #087443;
+
+            border: 1px solid #c8efdd;
+        }
+
+
+        /* =========================================================
+           NOTIFICACIÓN
+        ========================================================= */
+
+        .notificacion {
+            position: fixed;
+
+            right: 22px;
+            bottom: 22px;
+
+            z-index: 5000;
+
+            display: none;
+
+            max-width: 360px;
+
+            padding: 15px 18px;
+
+            background: var(--azul);
+            color: white;
+
+            border-left: 4px solid var(--amarillo);
+
+            border-radius: 11px;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+            font-size: 13px;
+            font-weight: 700;
+
+            animation: aparecerNotificacion 0.3s ease;
+        }
+
+        @keyframes aparecerNotificacion {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            padding: 40px 6%;
+
+            background: #091d31;
+
+            color: rgba(255,255,255,0.55);
+
+            text-align: center;
+        }
+
+        .footer-logo {
+            margin-bottom: 10px;
+
+            color: white;
+
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .footer-logo span {
+            color: var(--amarillo);
+        }
+
+        footer p {
+            margin-top: 5px;
+
+            font-size: 12px;
+        }
+
+        footer span {
+            color: var(--amarillo);
+        }
+
+
+        /* =========================================================
+           RESPONSIVE TABLET
+        ========================================================= */
+
+        @media (max-width: 1150px) {
+
+            header {
+                padding: 0 3%;
+            }
+
+            nav a {
+                padding: 8px 7px;
+                font-size: 12px;
+            }
+
+            .educacion-container {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .emprendimientos {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        /* =========================================================
+           RESPONSIVE MÓVIL
+        ========================================================= */
+
+        @media (max-width: 850px) {
+
+            header {
+                height: auto;
+
+                flex-direction: column;
+
+                gap: 12px;
+
+                padding: 13px 5%;
+            }
+
+            nav {
+                width: 100%;
+
+                justify-content: center;
+
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            .cuenta-menu {
+                margin-left: 0;
+            }
+
+            #inicio {
+                min-height: 750px;
+
+                background-position: 60% center;
+            }
+
+            .hero {
+                padding: 70px 6%;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .contacto-container {
+                grid-template-columns: 1fr;
+            }
+
+            .emprendedores {
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            section {
+                padding: 70px 5%;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .logo-icon {
+                width: 37px;
+                height: 37px;
+            }
+
+            .educacion-container,
+            .emprendimientos {
+                grid-template-columns: 1fr;
+            }
+
+            .botones-inicio {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .boton,
+            .boton-secundario {
+                width: 100%;
+            }
+
+            .hero-stats {
+                gap: 22px;
+            }
+
+            .aviso-login,
+            .form-publicar,
+            .contacto-form,
+            .contacto-info,
+            .perfil-container {
+                padding: 25px;
+            }
+
+            .perfil-dato {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .modal-contenido {
+                padding: 27px 22px;
+            }
+
+            .cuenta-menu {
+                width: 100%;
+                justify-content: center;
+            }
+
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         HEADER
+    ========================================================== -->
+
+    <header>
+
+        <a href="#inicio" class="logo">
+
+            <div class="logo-icon">
+                🪙
+            </div>
+
+            Muller <span>Market</span>
+
+        </a>
+
+
+        <nav>
+
+            <a href="#inicio">
+                Inicio
+            </a>
+
+            <a href="#educacion">
+                Educación
+            </a>
+
+            <a href="#emprendimientos">
+                Emprendimientos
+            </a>
+
+            <a href="#emprendedores">
+                Emprendedores
+            </a>
+
+            <a href="#contacto">
+                Contacto
+            </a>
+
+            <a href="#publicar">
+                Publicar
+            </a>
+
+        </nav>
+
+
+        <div class="cuenta-menu">
+
+            <div id="botones-no-login">
+
+                <button
+                    class="btn-login"
+                    onclick="abrirLogin()">
+
+                    Iniciar sesión
+
+                </button>
+
+                <button
+                    class="btn-cuenta"
+                    onclick="abrirRegistro()">
+
+                    Crear cuenta
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="usuario-activo"
+                id="usuario-activo">
+
+                <span
+                    class="nombre-usuario"
+                    id="nombre-usuario-menu">
+
+                    Usuario
+
+                </span>
+
+                <button
+                    class="btn-cerrar"
+                    onclick="cerrarSesion()">
+
+                    Salir
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================================
+         INICIO
+    ========================================================== -->
+
+    <section id="inicio">
+
+        <div class="hero">
+
+            <div class="hero-content">
+
+                <div class="coin">
+                    🪙 Moneda oficial · MullerCoin (MC)
+                </div>
+
+
+                <h1>
+                    Muller
+                    <span>Market.</span>
+                </h1>
+
+
+                <p class="hero-description">
+
+                    El espacio donde nuestra comunidad educativa
+                    puede descubrir emprendimientos, apoyar ideas
+                    y aprender sobre participación, responsabilidad
+                    y economía.
+
+                </p>
+
+
+                <div class="botones-inicio">
+
+                    <a
+                        href="#emprendimientos"
+                        class="boton">
+
+                        🛍️ Explorar emprendimientos
+
+                    </a>
+
+
+                    <button
+                        class="boton-secundario"
+                        onclick="abrirLogin()">
+
+                        Iniciar sesión
+
+                    </button>
+
+
+                    <button
+                        class="boton-secundario"
+                        onclick="abrirRegistro()">
+
+                        Registrarse gratis
+
+                    </button>
+
+                </div>
+
+
+                <div class="hero-stats">
+
+                    <div class="hero-stat">
+
+                        <strong>MC</strong>
+
+                        <span>
+                            Moneda virtual
+                        </span>
+
+                    </div>
+
+
+                    <div class="hero-stat">
+
+                        <strong>100%</strong>
+
+                        <span>
+                            Comunidad escolar
+                        </span>
+
+                    </div>
+
+
+                    <div class="hero-stat">
+
+                        <strong>∞</strong>
+
+                        <span>
+                            Ideas por crear
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         EDUCACIÓN CIUDADANA
+    ========================================================== -->
+
+    <section id="educacion">
+
+        <div class="section-inner">
+
+            <div class="section-header">
+
+                <span class="section-label">
+                    Aprender haciendo
+                </span>
+
+                <h2>
+                    Educación Ciudadana
+                </h2>
+
+                <p>
+                    Muller Market conecta el emprendimiento con
+                    valores fundamentales para construir una
+                    comunidad educativa más participativa,
+                    responsable y colaborativa.
+                </p>
+
+            </div>
+
+
+            <div class="educacion-container">
+
+
+                <div class="tarjeta">
+
+                    <div class="tarjeta-icon">
+                        🤝
+                    </div>
+
+                    <h3>
+                        Participación
+                    </h3>
+
+                    <p>
+                        Invitamos a los estudiantes a involucrarse
+                        activamente y aportar sus ideas a la
+                        comunidad escolar.
+                    </p>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <div class="tarjeta-icon">
+                        💡
+                    </div>
+
+                    <h3>
+                        Creatividad
+                    </h3>
+
+                    <p>
+                        Convertimos ideas en proyectos, productos
+                        y servicios creados por estudiantes.
+                    </p>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <div class="tarjeta-icon">
+                        ⚖️
+                    </div>
+
+                    <h3>
+                        Responsabilidad
+                    </h3>
+
+                    <p>
+                        Aprendemos a administrar recursos y tomar
+                        decisiones responsables mediante el
+                        intercambio.
+                    </p>
+
+                </div>
+
+
+                <div class="tarjeta">
+
+                    <div class="tarjeta-icon">
+                        🌱
+                    </div>
+
+                    <h3>
+                        Comunidad
+                    </h3>
+
+                    <p>
+                        Fortalecemos los vínculos entre estudiantes
+                        y creamos oportunidades para colaborar.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         EMPRENDIMIENTOS
+    ========================================================== -->
+
+    <section id="emprendimientos">
+
+        <div class="section-inner">
+
+            <div class="section-header">
+
+                <span class="section-label">
+                    Compra y descubre
+                </span>
+
+                <h2>
+                    Emprendimientos
+                </h2>
+
+                <p>
+                    Descubre los productos y servicios que forman
+                    parte de Muller Market y apoya las ideas de
+                    nuestra comunidad.
+                </p>
+
+            </div>
+
+
+            <div class="emprendimientos">
+
+
+                <!-- PRODUCTO 1 -->
+
+                <div class="producto">
+
+                    <div class="producto-imagen">
+
+                        IMAGEN DEL PRODUCTO
+
+                    </div>
+
+                    <div class="producto-info">
+
+                        <h3>
+                            Emprendimiento 1
+                        </h3>
+
+                        <p>
+                            Descripción del producto o servicio
+                            disponible en Muller Market.
+                        </p>
+
+                        <div class="precio">
+                            100 MC
+                        </div>
+
+                        <button
+                            class="boton-comprar"
+                            onclick="comprarProducto('Emprendimiento 1')">
+
+                            Comprar producto
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PRODUCTO 2 -->
+
+                <div class="producto">
+
+                    <div class="producto-imagen">
+
+                        IMAGEN DEL PRODUCTO
+
+                    </div>
+
+                    <div class="producto-info">
+
+                        <h3>
+                            Emprendimiento 2
+                        </h3>
+
+                        <p>
+                            Descripción del producto o servicio
+                            disponible en Muller Market.
+                        </p>
+
+                        <div class="precio">
+                            150 MC
+                        </div>
+
+                        <button
+                            class="boton-comprar"
+                            onclick="comprarProducto('Emprendimiento 2')">
+
+                            Comprar producto
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PRODUCTO 3 -->
+
+                <div class="producto">
+
+                    <div class="producto-imagen">
+
+                        IMAGEN DEL PRODUCTO
+
+                    </div>
+
+                    <div class="producto-info">
+
+                        <h3>
+                            Emprendimiento 3
+                        </h3>
+
+                        <p>
+                            Descripción del producto o servicio
+                            disponible en Muller Market.
+                        </p>
+
+                        <div class="precio">
+                            200 MC
+                        </div>
+
+                        <button
+                            class="boton-comprar"
+                            onclick="comprarProducto('Emprendimiento 3')">
+
+                            Comprar producto
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PRODUCTO 4 -->
+
+                <div class="producto">
+
+                    <div class="producto-imagen">
+
+                        IMAGEN DEL PRODUCTO
+
+                    </div>
+
+                    <div class="producto-info">
+
+                        <h3>
+                            Emprendimiento 4
+                        </h3>
+
+                        <p>
+                            Descripción del producto o servicio
+                            disponible en Muller Market.
+                        </p>
+
+                        <div class="precio">
+                            250 MC
+                        </div>
+
+                        <button
+                            class="boton-comprar"
+                            onclick="comprarProducto('Emprendimiento 4')">
+
+                            Comprar producto
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         EMPRENDEDORES
+    ========================================================== -->
+
+    <section id="emprendedores">
+
+        <div class="section-inner">
+
+            <div class="section-header">
+
+                <span class="section-label">
+                    Conoce a nuestra comunidad
+                </span>
+
+                <h2>
+                    Emprendedores
+                </h2>
+
+                <p>
+                    Conoce a los estudiantes que están detrás
+                    de las ideas y emprendimientos de Muller Market.
+                </p>
+
+            </div>
+
+
+            <div
+                class="emprendedores"
+                id="lista-emprendedores">
+
+
+                <div class="emprendedor">
+
+                    <div class="foto-emprendedor">
+                        FOTO
+                    </div>
+
+                    <h3>
+                        Nombre del estudiante
+                    </h3>
+
+                    <p>
+                        Curso: ______
+                    </p>
+
+                    <p>
+                        Emprendimiento: ______
+                    </p>
+
+                </div>
+
+
+                <div class="emprendedor">
+
+                    <div class="foto-emprendedor">
+                        FOTO
+                    </div>
+
+                    <h3>
+                        Nombre del estudiante
+                    </h3>
+
+                    <p>
+                        Curso: ______
+                    </p>
+
+                    <p>
+                        Emprendimiento: ______
+                    </p>
+
+                </div>
+
+
+                <div class="emprendedor">
+
+                    <div class="foto-emprendedor">
+                        FOTO
+                    </div>
+
+                    <h3>
+                        Nombre del estudiante
+                    </h3>
+
+                    <p>
+                        Curso: ______
+                    </p>
+
+                    <p>
+                        Emprendimiento: ______
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         PUBLICAR
+    ========================================================== -->
+
+    <section id="publicar">
+
+        <div class="section-inner">
+
+            <div class="section-header">
+
+                <span class="section-label">
+                    Tu idea puede crecer
+                </span>
+
+                <h2>
+                    Vende en Muller Market
+                </h2>
+
+                <p>
+                    ¿Tienes un emprendimiento? Crea una cuenta
+                    y publica tus productos para que otros
+                    estudiantes puedan conocerlos.
+                </p>
+
+            </div>
+
+
+            <div class="publicar-container">
+
+
+                <!-- AVISO SIN LOGIN -->
+
+                <div
+                    class="aviso-login"
+                    id="aviso-publicar">
+
+                    <div class="aviso-icon">
+                        🔒
+                    </div>
+
+                    <h3>
+                        Inicia sesión para publicar
+                    </h3>
+
+                    <p>
+                        Para subir productos y formar parte de
+                        los emprendedores de Muller Market
+                        necesitas tener una cuenta.
+                    </p>
+
+
+                    <div class="aviso-botones">
+
+                        <button
+                            class="boton"
+                            onclick="abrirLogin()">
+
+                            Iniciar sesión
+
+                        </button>
+
+                        <button
+                            class="boton-secundario"
+                            style="
+                                color:#17365d;
+                                border-color:#17365d;
+                            "
+                            onclick="abrirRegistro()">
+
+                            Crear cuenta
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORMULARIO -->
+
+                <form
+                    class="form-publicar"
+                    id="form-publicar"
+                    onsubmit="publicarProducto(event)">
+
+                    <h3>
+                        🚀 Publicar nuevo producto
+                    </h3>
+
+
+                    <div class="campo">
+
+                        <label>
+                            Nombre del producto
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nombre-producto"
+                            placeholder="Ej: Pulseras artesanales"
+                            required>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label>
+                            Descripción
+                        </label>
+
+                        <textarea
+                            id="descripcion-producto"
+                            placeholder="Describe tu producto..."
+                            required></textarea>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label>
+                            Precio en MullerCoin
+                        </label>
+
+                        <input
+                            type="number"
+                            id="precio-producto"
+                            min="1"
+                            placeholder="Ej: 100"
+                            required>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label>
+                            Imagen del producto
+                        </label>
+
+                        <input
+                            type="file"
+                            id="imagen-producto"
+                            accept="image/*">
+
+                    </div>
+
+
+                    <button type="submit">
+
+                        Publicar producto
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         PERFIL
+    ========================================================== -->
+
+    <section id="perfil">
+
+        <div class="section-inner">
+
+            <div class="section-header">
+
+                <span class="section-label">
+                    Tu espacio
+                </span>
+
+                <h2>
+                    Mi cuenta
+                </h2>
+
+                <p>
+                    Información de tu cuenta de Muller Market.
+                </p>
+
+            </div>
+
+
+            <div class="perfil-container">
+
+                <div class="perfil-header">
+
+                    <div class="perfil-avatar">
+                        👤
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Información de la cuenta
+                        </h3>
+
+                        <p>
+                            Datos registrados en Muller Market
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="perfil-dato">
+
+                    <strong>
+                        Nombre
+                    </strong>
+
+                    <span id="perfil-nombre">
+                    </span>
+
+                </div>
+
+
+                <div class="perfil-dato">
+
+                    <strong>
+                        Correo
+                    </strong>
+
+                    <span id="perfil-correo">
+                    </span>
+
+                </div>
+
+
+                <div class="perfil-dato">
+
+                    <strong>
+                        Tipo de cuenta
+                    </strong>
+
+                    <span id="perfil-tipo">
+                    </span>
+
+                </div>
+
+
+                <button onclick="cerrarSesion()">
+                    Cerrar sesión
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         CONTACTO
+    ========================================================== -->
+
+    <section id="contacto">
+
+        <div class="section-inner">
+
+            <div class="section-header">
+
+                <span class="section-label">
+                    Estamos para ayudarte
+                </span>
+
+                <h2>
+                    Contacto
+                </h2>
+
+                <p>
+                    ¿Tienes una pregunta, una idea o quieres
+                    participar? Ponte en contacto con nosotros.
+                </p>
+
+            </div>
+
+
+            <div class="contacto-container">
+
+
+                <div class="contacto-info">
+
+                    <h3>
+                        Información
+                    </h3>
+
+
+                    <div class="contacto-item">
+
+                        <div class="contacto-item-icon">
+                            🏫
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Liceo
+                            </strong>
+
+                            Liceo: ______________________
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="contacto-item">
+
+                        <div class="contacto-item-icon">
+                            📧
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Correo
+                            </strong>
+
+                            ______________________
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="contacto-item">
+
+                        <div class="contacto-item-icon">
+                            📱
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Redes sociales
+                            </strong>
+
+                            ______________________
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="contacto-item">
+
+                        <div class="contacto-item-icon">
+                            📍
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Dirección
+                            </strong>
+
+                            ______________________
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <form
+                    class="contacto-form"
+                    onsubmit="enviarContacto(event)">
+
+                    <h3>
+                        Envíanos un mensaje
+                    </h3>
+
+
+                    <input
+                        type="text"
+                        placeholder="Tu nombre"
+                        required>
+
+
+                    <input
+                        type="email"
+                        placeholder="Tu correo electrónico"
+                        required>
+
+
+                    <textarea
+                        placeholder="Escribe tu mensaje..."
+                        required></textarea>
+
+
+                    <button type="submit">
+                        Enviar mensaje
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer>
+
+        <div class="footer-logo">
+            Muller <span>Market</span>
+        </div>
+
+        <p>
+            © 2026 Muller Market —
+            Proyecto educativo de nuestra comunidad escolar.
+        </p>
+
+        <p>
+            Moneda virtual:
+            <span>MullerCoin (MC)</span>
+        </p>
+
+    </footer>
+
+
+
+    <!-- =========================================================
+         MODAL CUENTA
+    ========================================================== -->
+
+    <div
+        class="modal"
+        id="modal-cuenta">
+
+        <div class="modal-contenido">
+
+
+            <span
+                class="cerrar-modal"
+                onclick="cerrarModal()">
+
+                ×
+
+            </span>
+
+
+            <!-- LOGIN -->
+
+            <div id="login-contenido">
+
+                <h2>
+                    Bienvenido de vuelta 👋
+                </h2>
+
+                <p class="modal-descripcion">
+                    Inicia sesión para continuar en Muller Market.
+                </p>
+
+
+                <div
+                    id="mensaje-login"
+                    class="mensaje">
+                </div>
+
+
+                <form onsubmit="iniciarSesion(event)">
+
+                    <label>
+                        Correo electrónico
+                    </label>
+
+                    <input
+                        type="email"
+                        id="login-correo"
+                        placeholder="ejemplo@correo.com"
+                        required>
+
+
+                    <label>
+                        Contraseña
+                    </label>
+
+                    <input
+                        type="password"
+                        id="login-password"
+                        placeholder="Tu contraseña"
+                        required>
+
+
+                    <button type="submit">
+                        Iniciar sesión
+                    </button>
+
+                </form>
+
+
+                <p class="cambiar-modal">
+
+                    ¿No tienes una cuenta?
+
+                    <span onclick="mostrarRegistro()">
+                        Regístrate gratis
+                    </span>
+
+                </p>
+
+            </div>
+
+
+
+            <!-- REGISTRO -->
+
+            <div
+                id="registro-contenido"
+                style="display:none;">
+
+                <h2>
+                    Crear cuenta 🚀
+                </h2>
+
+                <p class="modal-descripcion">
+                    Regístrate para comprar y publicar productos.
+                </p>
+
+
+                <div
+                    id="mensaje-registro"
+                    class="mensaje">
+                </div>
+
+
+                <form onsubmit="registrarCuenta(event)">
+
+                    <label>
+                        Nombre completo
+                    </label>
+
+                    <input
+                        type="text"
+                        id="registro-nombre"
+                        placeholder="Tu nombre"
+                        required>
+
+
+                    <label>
+                        Correo electrónico
+                    </label>
+
+                    <input
+                        type="email"
+                        id="registro-correo"
+                        placeholder="ejemplo@correo.com"
+                        required>
+
+
+                    <label>
+                        Contraseña
+                    </label>
+
+                    <input
+                        type="password"
+                        id="registro-password"
+                        placeholder="Mínimo 6 caracteres"
+                        minlength="6"
+                        required>
+
+
+                    <label>
+                        Repetir contraseña
+                    </label>
+
+                    <input
+                        type="password"
+                        id="registro-password2"
+                        placeholder="Repite tu contraseña"
+                        minlength="6"
+                        required>
+
+
+                    <label>
+                        Tipo de cuenta
+                    </label>
+
+                    <select
+                        id="registro-tipo"
+                        required>
+
+                        <option value="">
+                            Selecciona una opción
+                        </option>
+
+                        <option value="Comprador">
+                            Comprador
+                        </option>
+
+                        <option value="Emprendedor">
+                            Emprendedor
+                        </option>
+
+                    </select>
+
+
+                    <button type="submit">
+                        Crear mi cuenta
+                    </button>
+
+                </form>
+
+
+                <p class="cambiar-modal">
+
+                    ¿Ya tienes una cuenta?
+
+                    <span onclick="mostrarLogin()">
+                        Inicia sesión
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         NOTIFICACIÓN
+    ========================================================== -->
+
+    <div
+        class="notificacion"
+        id="notificacion">
+    </div>
+
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script>
+
+        /* =====================================================
+           VARIABLE DE SESIÓN
+        ===================================================== */
+
+        let usuarioActual = null;
+
+
+        /* =====================================================
+           USUARIOS
+        ===================================================== */
+
+        function obtenerUsuarios() {
+
+            return JSON.parse(
+                localStorage.getItem("mullerUsuarios")
+            ) || [];
+
+        }
+
+
+        function guardarUsuarios(usuarios) {
+
+            localStorage.setItem(
+                "mullerUsuarios",
+                JSON.stringify(usuarios)
+            );
+
+        }
+
+
+        /* =====================================================
+           MODAL
+        ===================================================== */
+
+        function abrirLogin() {
+
+            document
+                .getElementById("modal-cuenta")
+                .style.display = "flex";
+
+            mostrarLogin();
+
+        }
+
+
+        function abrirRegistro() {
+
+            document
+                .getElementById("modal-cuenta")
+                .style.display = "flex";
+
+            mostrarRegistro();
+
+        }
+
+
+        function cerrarModal() {
+
+            document
+                .getElementById("modal-cuenta")
+                .style.display = "none";
+
+            limpiarMensajes();
+
+        }
+
+
+        function mostrarLogin() {
+
+            document
+                .getElementById("login-contenido")
+                .style.display = "block";
+
+            document
+                .getElementById("registro-contenido")
+                .style.display = "none";
+
+            limpiarMensajes();
+
+        }
+
+
+        function mostrarRegistro() {
+
+            document
+                .getElementById("login-contenido")
+                .style.display = "none";
+
+            document
+                .getElementById("registro-contenido")
+                .style.display = "block";
+
+            limpiarMensajes();
+
+        }
+
+
+        function limpiarMensajes() {
+
+            document
+                .querySelectorAll(".mensaje")
+                .forEach(function(mensaje) {
+
+                    mensaje.style.display = "none";
+                    mensaje.textContent = "";
+
+                });
+
+        }
+
+
+        function mostrarMensaje(id, texto, tipo) {
+
+            const mensaje =
+                document.getElementById(id);
+
+            mensaje.textContent = texto;
+
+            mensaje.className =
+                "mensaje " + tipo;
+
+            mensaje.style.display = "block";
+
+        }
+
+
+        /* =====================================================
+           REGISTRO
+        ===================================================== */
+
+        function registrarCuenta(event) {
+
+            event.preventDefault();
+
+
+            const nombre =
+                document
+                    .getElementById("registro-nombre")
+                    .value
+                    .trim();
+
+
+            const correo =
+                document
+                    .getElementById("registro-correo")
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+
+            const password =
+                document
+                    .getElementById("registro-password")
+                    .value;
+
+
+            const password2 =
+                document
+                    .getElementById("registro-password2")
+                    .value;
+
+
+            const tipo =
+                document
+                    .getElementById("registro-tipo")
+                    .value;
+
+
+            if (password !== password2) {
+
+                mostrarMensaje(
+                    "mensaje-registro",
+                    "Las contraseñas no coinciden.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (password.length < 6) {
+
+                mostrarMensaje(
+                    "mensaje-registro",
+                    "La contraseña debe tener al menos 6 caracteres.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            let usuarios =
+                obtenerUsuarios();
+
+
+            const existe =
+                usuarios.some(
+                    usuario =>
+                        usuario.correo === correo
+                );
+
+
+            if (existe) {
+
+                mostrarMensaje(
+                    "mensaje-registro",
+                    "Ya existe una cuenta con ese correo.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const nuevoUsuario = {
+
+                id: Date.now(),
+
+                nombre: nombre,
+
+                correo: correo,
+
+                password: password,
+
+                tipo: tipo
+
+            };
+
+
+            usuarios.push(nuevoUsuario);
+
+            guardarUsuarios(usuarios);
+
+
+            usuarioActual = nuevoUsuario;
+
+
+            localStorage.setItem(
+                "mullerUsuarioActual",
+                JSON.stringify(usuarioActual)
+            );
+
+
+            actualizarInterfaz();
+
+            cerrarModal();
+
+
+            mostrarNotificacion(
+                "✅ Cuenta creada correctamente. ¡Bienvenido/a " +
+                nombre +
+                "!"
+            );
+
+        }
+
+
+        /* =====================================================
+           LOGIN
+        ===================================================== */
+
+        function iniciarSesion(event) {
+
+            event.preventDefault();
+
+
+            const correo =
+                document
+                    .getElementById("login-correo")
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+
+            const password =
+                document
+                    .getElementById("login-password")
+                    .value;
+
+
+            const usuarios =
+                obtenerUsuarios();
+
+
+            const usuario =
+                usuarios.find(
+                    u =>
+                        u.correo === correo &&
+                        u.password === password
+                );
+
+
+            if (!usuario) {
+
+                mostrarMensaje(
+                    "mensaje-login",
+                    "Correo o contraseña incorrectos.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            usuarioActual = usuario;
+
+
+            localStorage.setItem(
+                "mullerUsuarioActual",
+                JSON.stringify(usuarioActual)
+            );
+
+
+            actualizarInterfaz();
+
+            cerrarModal();
+
+
+            mostrarNotificacion(
+                "👋 ¡Bienvenido/a nuevamente, " +
+                usuario.nombre +
+                "!"
+            );
+
+        }
+
+
+        /* =====================================================
+           CERRAR SESIÓN
+        ===================================================== */
+
+        function cerrarSesion() {
+
+            usuarioActual = null;
+
+
+            localStorage.removeItem(
+                "mullerUsuarioActual"
+            );
+
+
+            actualizarInterfaz();
+
+
+            mostrarNotificacion(
+                "Has cerrado sesión correctamente."
+            );
+
+        }
+
+
+        /* =====================================================
+           ACTUALIZAR INTERFAZ
+        ===================================================== */
+
+        function actualizarInterfaz() {
+
+            const botones =
+                document.getElementById(
+                    "botones-no-login"
+                );
+
+
+            const usuarioMenu =
+                document.getElementById(
+                    "usuario-activo"
+                );
+
+
+            const nombreMenu =
+                document.getElementById(
+                    "nombre-usuario-menu"
+                );
+
+
+            const avisoPublicar =
+                document.getElementById(
+                    "aviso-publicar"
+                );
+
+
+            const formPublicar =
+                document.getElementById(
+                    "form-publicar"
+                );
+
+
+            const perfil =
+                document.getElementById(
+                    "perfil"
+                );
+
+
+            if (usuarioActual) {
+
+                botones.style.display = "none";
+
+                usuarioMenu.style.display = "flex";
+
+
+                nombreMenu.textContent =
+                    "👤 " +
+                    usuarioActual.nombre;
+
+
+                avisoPublicar.style.display =
+                    "none";
+
+
+                formPublicar.style.display =
+                    "block";
+
+
+                perfil.style.display =
+                    "block";
+
+
+                document.getElementById(
+                    "perfil-nombre"
+                ).textContent =
+                    usuarioActual.nombre;
+
+
+                document.getElementById(
+                    "perfil-correo"
+                ).textContent =
+                    usuarioActual.correo;
+
+
+                document.getElementById(
+                    "perfil-tipo"
+                ).textContent =
+                    usuarioActual.tipo;
+
+            }
+
+            else {
+
+                botones.style.display =
+                    "flex";
+
+                usuarioMenu.style.display =
+                    "none";
+
+                avisoPublicar.style.display =
+                    "block";
+
+                formPublicar.style.display =
+                    "none";
+
+                perfil.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        /* =====================================================
+           COMPRAR
+        ===================================================== */
+
+        function comprarProducto(nombreProducto) {
+
+            if (!usuarioActual) {
+
+                mostrarNotificacion(
+                    "🔒 Debes iniciar sesión para comprar productos."
+                );
+
+                abrirLogin();
+
+                return;
+
+            }
+
+
+            mostrarNotificacion(
+                "🛍️ Has seleccionado: " +
+                nombreProducto +
+                ". Tu cuenta está iniciada."
+            );
+
+        }
+
+
+        /* =====================================================
+           PUBLICAR PRODUCTO
+        ===================================================== */
+
+        function publicarProducto(event) {
+
+            event.preventDefault();
+
+
+            if (!usuarioActual) {
+
+                mostrarNotificacion(
+                    "🔒 Debes iniciar sesión para publicar productos."
+                );
+
+                abrirLogin();
+
+                return;
+
+            }
+
+
+            const nombre =
+                document
+                    .getElementById("nombre-producto")
+                    .value
+                    .trim();
+
+
+            const descripcion =
+                document
+                    .getElementById("descripcion-producto")
+                    .value
+                    .trim();
+
+
+            const precio =
+                document
+                    .getElementById("precio-producto")
+                    .value;
+
+
+            const producto = {
+
+                id: Date.now(),
+
+                nombre: nombre,
+
+                descripcion: descripcion,
+
+                precio: precio,
+
+                vendedor: usuarioActual.nombre,
+
+                fecha:
+                    new Date()
+                        .toLocaleDateString("es-CL")
+
+            };
+
+
+            let productos =
+                JSON.parse(
+                    localStorage.getItem(
+                        "mullerProductos"
+                    )
+                ) || [];
+
+
+            productos.push(producto);
+
+
+            localStorage.setItem(
+                "mullerProductos",
+                JSON.stringify(productos)
+            );
+
+
+            document
+                .getElementById("form-publicar")
+                .reset();
+
+
+            mostrarNotificacion(
+                "✅ Producto publicado correctamente."
+            );
+
+
+            agregarProductoVisual(producto);
+
+        }
+
+
+        /* =====================================================
+           ESCAPAR HTML
+        ===================================================== */
+
+        function escaparHTML(texto) {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent = texto;
+
+            return div.innerHTML;
+
+        }
+
+
+        /* =====================================================
+           AGREGAR PRODUCTO VISUAL
+        ===================================================== */
+
+        function agregarProductoVisual(producto) {
+
+            const contenedor =
+                document.querySelector(
+                    ".emprendimientos"
+                );
+
+
+            const tarjeta =
+                document.createElement("div");
+
+
+            tarjeta.className =
+                "producto";
+
+
+            const nombre =
+                escaparHTML(producto.nombre);
+
+
+            const descripcion =
+                escaparHTML(producto.descripcion);
+
+
+            const vendedor =
+                escaparHTML(producto.vendedor);
+
+
+            tarjeta.innerHTML = `
+
+                <div class="producto-imagen">
+
+                    🛍️
+
+                </div>
+
+                <div class="producto-info">
+
+                    <h3>
+                        ${nombre}
+                    </h3>
+
+                    <p>
+                        ${descripcion}
+                    </p>
+
+                    <div class="precio">
+                        ${producto.precio} MC
+                    </div>
+
+                    <p style="
+                        margin-top:10px;
+                        font-size:11px;
+                        color:#64748b;
+                    ">
+
+                        Vendedor:
+                        <strong>
+                            ${vendedor}
+                        </strong>
+
+                    </p>
+
+                    <button
+                        class="boton-comprar"
+                        onclick="comprarProducto(this.dataset.producto)"
+                        data-producto="${nombre}">
+
+                        Comprar producto
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            contenedor.appendChild(tarjeta);
+
+        }
+
+
+        /* =====================================================
+           CARGAR PRODUCTOS
+        ===================================================== */
+
+        function cargarProductos() {
+
+            const productos =
+                JSON.parse(
+                    localStorage.getItem(
+                        "mullerProductos"
+                    )
+                ) || [];
+
+
+            productos.forEach(
+                function(producto) {
+
+                    agregarProductoVisual(producto);
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           NOTIFICACIONES
+        ===================================================== */
+
+        function mostrarNotificacion(texto) {
+
+            const notificacion =
+                document.getElementById(
+                    "notificacion"
+                );
+
+
+            notificacion.textContent =
+                texto;
+
+
+            notificacion.style.display =
+                "block";
+
+
+            clearTimeout(
+                window.timerNotificacion
+            );
+
+
+            window.timerNotificacion =
+                setTimeout(
+                    function() {
+
+                        notificacion.style.display =
+                            "none";
+
+                    },
+                    4000
+                );
+
+        }
+
+
+        /* =====================================================
+           CONTACTO
+        ===================================================== */
+
+        function enviarContacto(event) {
+
+            event.preventDefault();
+
+
+            mostrarNotificacion(
+                "✅ Mensaje enviado correctamente."
+            );
+
+
+            event.target.reset();
+
+        }
+
+
+        /* =====================================================
+           CARGAR PÁGINA
+        ===================================================== */
+
+        window.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                const sesionGuardada =
+                    localStorage.getItem(
+                        "mullerUsuarioActual"
+                    );
+
+
+                if (sesionGuardada) {
+
+                    try {
+
+                        usuarioActual =
+                            JSON.parse(
+                                sesionGuardada
+                            );
+
+                    }
+
+                    catch (error) {
+
+                        localStorage.removeItem(
+                            "mullerUsuarioActual"
+                        );
+
+                    }
+
+                }
+
+
+                actualizarInterfaz();
+
+                cargarProductos();
+
+            }
+        );
+
+
+        /* =====================================================
+           CERRAR MODAL AL HACER CLICK AFUERA
+        ===================================================== */
+
+        window.addEventListener(
+            "click",
+            function(event) {
+
+                const modal =
+                    document.getElementById(
+                        "modal-cuenta"
+                    );
+
+
+                if (event.target === modal) {
+
+                    cerrarModal();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           ESC PARA CERRAR MODAL
+        ===================================================== */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    cerrarModal();
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
